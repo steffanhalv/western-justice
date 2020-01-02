@@ -1,12 +1,15 @@
 <template>
   <div class="background">
     <button @click="$router.push('/')">Logout</button>
+    <player style="position: absolute; left: 50%; top: 50%"/>
   </div>
 </template>
 
 <script>
+import Player from '@/components/Player'
 export default {
   components: {
+    Player
   },
   data() {
     return {
