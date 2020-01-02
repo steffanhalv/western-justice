@@ -4,7 +4,7 @@
       <h1 style="width: 100%">Western Justice</h1>
       <input v-model="username" class="username">
       <input v-model="password" type="password" class="password">
-      <button @click="login">Login</button>
+      <button @click="$router.push('/game')">Login</button>
     </div>
   </div>
 </template>
