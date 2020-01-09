@@ -21,7 +21,7 @@ app.get('/v1', function (req, res) {
       err
     })
     else {
-      let collection = client.db('test').collection('devices')
+      let collection = client.db('wj').collection('users')
       collection.find({}).toArray(function(err, docs) {
         if (err) res.json({
           msg: 'Connection err _b',
