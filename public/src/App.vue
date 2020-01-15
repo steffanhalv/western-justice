@@ -4,6 +4,13 @@
   </div>
 </template>
 
+<script>
+export default {
+  mounted() {
+  }
+}
+</script>
+
 <style>
 @import url('https://fonts.googleapis.com/css?family=Bevan&display=swap');
 #app, body {

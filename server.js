@@ -1,47 +1,45 @@
 'stricted'
 
-const env = require('./env.js')
 const http = require('http')
 const express = require('express')
 const socketIO = require('socket.io')
-const mongodb = require('mongodb')
+const router = require('./src/v1/router.js')
 
 let app = express()
-let server = http.createServer(app)
+let server = http.Server(app)
+let io = socketIO(server)
 let port = process.env.PORT || 3000
 
+// Public folder
 app.use(express.static('public/dist'))
-app.use(express.static('public/socket'))
 
-app.get('/v1', function (req, res) {
-  let client = new mongodb.MongoClient(env.creds.mongo, { useNewUrlParser: true })
-  client.connect(err => {
-    if (err) res.json({
-      msg: 'Connection err _a',
-      err
-    })
-    else {
-      let collection = client.db('wj').collection('users')
-      collection.find({}).toArray(function(err, docs) {
-        if (err) res.json({
-          msg: 'Connection err _b',
-          err
-        })
-        else res.json(docs)
-      })
-      client.close()
-    }
+// Rest API
+router.forEach(route => {
+  app.get('/v1' + route.path, function (req, res) {
+    route.method(req.body)
+      .then(results => res.json(results))
+      .catch(results => res.status(400).json(results))
   })
 })
 
-let io = socketIO(server)
+// Socket API
+let connections = 0
 io.on('connection', (socket) => {
-  console.log('Client connected')
-  socket.on('disconnect', () => console.log('Client disconnected'))
+  connections++
+  router.forEach(route => {
+    socket.on(route.path, data => {
+      route.method(data)
+        .then(results => socket.emit(route.path, results))
+        .catch(results => socket.emit(route.path, results))
+    })
+  })
+  socket.on('disconnect', () => connections--)
 })
 
-setInterval(() => io.emit('time',
-  new Date().toTimeString()
-), 1000)
+// Socket broadcast
+setInterval(() => io.emit('status', {
+  time: new Date().toTimeString(),
+  users: connections
+}), 1000)
 
 server.listen(port, () => console.log(`Listening on http://localhost:${port}`))
