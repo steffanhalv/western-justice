@@ -1,11 +1,54 @@
 <template>
   <div id="app">
     <router-view/>
+    <div style="position: absolute; bottom: 10px; right: 10px;">
+      <button
+        :style="'opacity: ' + ($store.state.direction === 'up' ? '1' : '.5')"
+        class="up"
+        @mousedown="$store.state.direction = 'up', $store.state.walking = true"
+        @mouseup="$store.state.walking = false"
+      >UP</button>
+      <button
+        :style="'opacity: ' + ($store.state.direction === 'down' ? '1' : '.5')"
+        class="down"
+        @mousedown="$store.state.direction = 'down', $store.state.walking = true"
+        @mouseup="$store.state.walking = false"
+      >DOWN</button>
+      <button
+        :style="'opacity: ' + ($store.state.direction === 'right' ? '1' : '.5')"
+        class="right"
+        @mousedown="$store.state.direction = 'right', $store.state.walking = true"
+        @mouseup="$store.state.walking = false"
+      >RIGHT</button>
+      <button
+        :style="'opacity: ' + ($store.state.direction === 'left' ? '1' : '.5')"
+        class="left"
+        @mousedown="$store.state.direction = 'left', $store.state.walking = true"
+        @mouseup="$store.state.walking = false"
+      >LEFT</button>
+      <button
+        class="jump"
+        @click="jump()"
+      >JUMP</button>
+      <button
+        :style="'opacity: ' + ($store.state.run ? '1' : '.5')"
+        class="run"
+        @click="$store.state.run = !$store.state.run"
+      >RUN</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  methods: {
+    jump() {
+      this.$store.state.jumping = true
+      setTimeout(() => {
+        this.$store.state.jumping = false
+      }, 200)
+    }
+  },
   created() {
     document.addEventListener('keydown', e => {
       // e.preventDefault()
@@ -71,5 +114,62 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+</style>
+
+<style scoped>
+.up, .down, .right, .left, .jump, .run {
+  border-radius: 8px;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  opacity: .5;
+  outline: none;
+  transition: all .2s ease;
+}
+.up:hover, .down:hover, .right:hover, .left:hover, .jump:hover, .run:hover {
+  opacity: 1!important;
+}
+.up {
+  position: absolute;
+  bottom: 220px;
+  right: 110px;
+  height: 100px;
+  width: 100px;
+}
+.down {
+  position: absolute;
+  bottom: 0;
+  right: 110px;
+  height: 100px;
+  width: 100px;
+}
+.run {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100px;
+  width: 100px;
+}
+.right {
+  position: absolute;
+  bottom: 110px;
+  right: 0;
+  height: 100px;
+  width: 100px;
+}
+.left {
+  position: absolute;
+  bottom: 110px;
+  right: 220px;
+  height: 100px;
+  width: 100px;
+}
+.jump {
+  position: absolute;
+  bottom: 110px;
+  right: 110px;
+  height: 100px;
+  width: 100px;
 }
 </style>

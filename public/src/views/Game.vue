@@ -1,7 +1,7 @@
 <template>
   <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden;">
     <div class="background" :style="mapStyle"></div>
-    <button @click="$router.push('/')">Logout</button>
+    <button @click="$router.push('/')">EXIT</button>
     <player
       id="player"
       :player="$store.state"
@@ -59,12 +59,6 @@ export default {
         }
         this.walk()
       }, 10)
-    },
-    jump() {
-      this.$store.state.jumping = true
-      setTimeout(() => {
-        this.$store.state.jumping = false
-      }, 200)
     }
   },
   mounted() {
@@ -91,6 +85,23 @@ export default {
 
 
 <style scoped>
+button {
+  font-weight: bold;
+  background: #555;
+  color: white;
+  padding: 20px;
+  margin: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: white;
+  color: #555;
+  padding: 20px;
+  margin: 20px;
+  border: none;
+}
 .background {
   z-index: -1;
   position: absolute;
