@@ -5,24 +5,32 @@
       <button
         :style="'opacity: ' + ($store.state.direction === 'up' ? '1' : '.5')"
         class="up"
+        @touchstart="$store.state.direction = 'up', $store.state.walking = true"
         @mousedown="$store.state.direction = 'up', $store.state.walking = true"
         @mouseup="$store.state.walking = false"
+        @touchend="$store.state.walking = false"
       >UP</button>
       <button
         :style="'opacity: ' + ($store.state.direction === 'down' ? '1' : '.5')"
         class="down"
+        @touchstart="$store.state.direction = 'down', $store.state.walking = true"
+        @touchend="$store.state.walking = false"
         @mousedown="$store.state.direction = 'down', $store.state.walking = true"
         @mouseup="$store.state.walking = false"
       >DOWN</button>
       <button
         :style="'opacity: ' + ($store.state.direction === 'right' ? '1' : '.5')"
         class="right"
+        @touchstart="$store.state.direction = 'right', $store.state.walking = true"
+        @touchend="$store.state.walking = false"
         @mousedown="$store.state.direction = 'right', $store.state.walking = true"
         @mouseup="$store.state.walking = false"
       >RIGHT</button>
       <button
         :style="'opacity: ' + ($store.state.direction === 'left' ? '1' : '.5')"
         class="left"
+        @touchstart="$store.state.direction = 'left', $store.state.walking = true"
+        @touchend="$store.state.walking = false"
         @mousedown="$store.state.direction = 'left', $store.state.walking = true"
         @mouseup="$store.state.walking = false"
       >LEFT</button>
@@ -111,8 +119,8 @@ export default {
 #app, body {
   font-family: 'Bevan', cursive;
   margin: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
 }
 </style>
@@ -132,44 +140,44 @@ export default {
 }
 .up {
   position: absolute;
-  bottom: 220px;
-  right: 110px;
-  height: 100px;
-  width: 100px;
+  bottom: 110px;
+  right: 55px;
+  height: 50px;
+  width: 50px;
 }
 .down {
   position: absolute;
   bottom: 0;
-  right: 110px;
-  height: 100px;
-  width: 100px;
+  right: 55px;
+  height: 50px;
+  width: 50px;
 }
 .run {
   position: absolute;
   bottom: 0;
   right: 0;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
 }
 .right {
   position: absolute;
-  bottom: 110px;
+  bottom: 55px;
   right: 0;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
 }
 .left {
   position: absolute;
-  bottom: 110px;
-  right: 220px;
-  height: 100px;
-  width: 100px;
+  bottom: 55px;
+  right: 110px;
+  height: 50px;
+  width: 50px;
 }
 .jump {
   position: absolute;
-  bottom: 110px;
-  right: 110px;
-  height: 100px;
-  width: 100px;
+  bottom: 55px;
+  right: 55px;
+  height: 50px;
+  width: 50px;
 }
 </style>

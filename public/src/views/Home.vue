@@ -33,15 +33,16 @@ export default {
   background-image: url('~@/assets/gfx/dessert.png')
 }
 .login {
-  margin: 300px auto;
+  margin: 200px auto;
   width: 500px;
+  max-width: 90%;
   font-size: 25px;
   text-align: center;
 }
 .login input, .login button {
   border-radius: 4px;
   height: 50px;
-  width: 100%;
+  width: 90%;
   border: none;
   background-color: rgb(134, 91, 56);
   color: white;
