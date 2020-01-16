@@ -19,6 +19,7 @@ export default new Vuex.Store({
     run: false,
     direction: 'up',
     jumping: false,
+    bullets: [],
     server: {
       players: [],
       users: 0,

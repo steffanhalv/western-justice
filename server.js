@@ -37,6 +37,9 @@ io.on('connection', (socket) => {
     }
     player = data
   })
+  socket.on('shoot', data => {
+    io.emit('shoot', data)
+  })
   socket.on('disconnect', () => {
     if (player) {
       delete players[player.username]

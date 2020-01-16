@@ -2,6 +2,7 @@
   <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden;">
     <div class="background" :style="mapStyle"></div>
     <button @click="$router.push('/')">EXIT</button>
+    {{ $store.state.bullets.length }}
     <player
       id="player"
       :player="$store.state"
@@ -21,6 +22,17 @@
       }"
       class="player"
       style="position: absolute"/>
+    <bullet
+      v-for="(bullet, i) in $store.state.bullets"
+      :key="bullet.id"
+      :index="i"
+      :parent="$store.state.bullets"
+      :bullet="bullet"
+      :style="{
+        left: bullet.x + px - $store.state.x + 'px',
+        top: bullet.y + py - $store.state.y + 'px'
+      }"
+      style="position: absolute"/>
       <div style="position: fixed; bottom: 50px; left: 50px;">
         x: {{ $store.state.x }},
         y: {{ $store.state.y }}
@@ -31,9 +43,11 @@
 
 <script>
 import Player from '@/components/Player'
+import Bullet from '@/components/Bullet'
 export default {
   components: {
-    Player
+    Player,
+    Bullet
   },
   data() {
     return {
@@ -110,8 +124,5 @@ button:hover {
   width: 2000px;
   height: 2000px;
   background-image: url('~@/assets/gfx/dessert.png');
-}
-.player {
-  transition: transform .2s linear;
 }
 </style>

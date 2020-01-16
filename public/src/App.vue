@@ -48,13 +48,24 @@
 </template>
 
 <script>
+let i = 0
 export default {
   methods: {
     jump() {
+      this.shoot()
       this.$store.state.jumping = true
       setTimeout(() => {
         this.$store.state.jumping = false
       }, 200)
+    },
+    shoot() {
+      this.$store.state.io.emit('shoot', {
+        id: this.$store.state.username,
+        uniq: this.$store.state.username + i++,
+        x: this.$store.state.x + 40,
+        y: this.$store.state.y + 40,
+        direction: this.$store.state.direction
+      })
     }
   },
   created() {
@@ -98,6 +109,9 @@ export default {
     })
     this.$store.state.io.on('server', server => {
       this.$store.state.server = server
+    })
+    this.$store.state.io.on('shoot', bullet => {
+      this.$store.state.bullets.push(bullet)
     })
     setInterval(() => {
       this.$store.state.io.emit('update', {

@@ -40,5 +40,6 @@ export default {
   background-image: url('~@/assets/hatt.png');
   background-size: contain;
   background-repeat: no-repeat;
+  transition: transform .2s linear;
 }
 </style>
