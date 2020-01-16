@@ -3,7 +3,7 @@
     <div class="login">
       <h1 style="width: 100%">Western Justice</h1>
       <input placeholder="Username" v-model="$store.state.username" class="username">
-      <button :disabled="$store.state.username.length < 3" @click="$router.push('/game')">Play</button>
+      <button :disabled="$store.state.username.length < 1" @click="$router.push('/game')">Play</button>
     </div>
   </div>
 </template>
@@ -14,8 +14,10 @@ export default {
   },
   data() {
     return {
-      username: ''
     }
+  },
+  mounted() {
+    this.$store.state.playing = false
   }
 }
 </script>

@@ -24,22 +24,32 @@ router.forEach(route => {
 
 // Socket API
 let connections = 0
+let players = {}
 io.on('connection', (socket) => {
+  let player = null
   connections++
-  router.forEach(route => {
-    socket.on(route.path, data => {
-      route.method(data)
-        .then(results => socket.emit(route.path, results))
-        .catch(results => socket.emit(route.path, results))
-    })
+  socket.on('update', data => {
+    if (player && data.username !== player.username) {
+      delete players[player.username]
+    }
+    if (data.username.length >= 1) {
+      players[data.username] = data
+    }
+    player = data
   })
-  socket.on('disconnect', () => connections--)
+  socket.on('disconnect', () => {
+    if (player) {
+      delete players[player.username]
+    }
+    connections--
+  })
 })
 
 // Socket broadcast
-setInterval(() => io.emit('status', {
+setInterval(() => io.emit('server', {
   time: new Date().toTimeString(),
-  users: connections
-}), 1000)
+  users: connections,
+  players: players
+}), 5)
 
 server.listen(port, () => console.log(`Listening on http://localhost:${port}`))
