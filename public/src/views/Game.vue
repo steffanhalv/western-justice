@@ -3,7 +3,7 @@
     <div class="background" :style="mapStyle"></div>
     <div class="water" :style="waterStyle"></div>
     <button @click="$router.push('/')">EXIT</button>
-    {{ Object.keys($store.state.bullets).length }}
+    {{ $store.state.hp }}
     <player
       id="player"
       :player="$store.state"

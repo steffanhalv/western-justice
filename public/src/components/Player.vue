@@ -1,7 +1,7 @@
 <template>
   <div :style="playerStyle" class="player">
     <span style="margin-left: -4px; margin-top: -25px; width: 100%; text-align: center; display: block">
-      {{ player.username || 'Guest' }}
+      {{ player.username || 'Guest' }} - {{ player.hp }}
     </span>
   </div>
 </template>

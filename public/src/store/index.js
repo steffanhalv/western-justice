@@ -13,6 +13,7 @@ export default new Vuex.Store({
     ),
     playing: false,
     username: '',
+    hp: 100,
     x: 0,
     y: 0,
     walking: false,

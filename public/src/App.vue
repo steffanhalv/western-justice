@@ -68,6 +68,7 @@ export default {
         uniq: this.$store.state.username + i++,
         x: this.$store.state.x + 40,
         y: this.$store.state.y + 40,
+        hp: this.$store.state.hp,
         direction: this.$store.state.direction
       })
     }
