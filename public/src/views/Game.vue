@@ -9,8 +9,8 @@
       :player="$store.state"
       class="player"
       :style="{
-        left: '50%',
-        top: '50%'
+        left: 'calc(50% - 45px)',
+        top: 'calc(50% - 45px)'
       }"
       style="position: absolute"/>
     <player
@@ -80,6 +80,14 @@ export default {
     this.$store.state.playing = true
     this.px = document.getElementById('player').getBoundingClientRect().left
     this.py = document.getElementById('player').getBoundingClientRect().top
+    window.addEventListener('resize', () => {
+      this.px = document.getElementById('player').getBoundingClientRect().left
+      this.py = document.getElementById('player').getBoundingClientRect().top
+    }, false)
+    window.addEventListener('orientationchange', () => {
+      this.px = document.getElementById('player').getBoundingClientRect().left
+      this.py = document.getElementById('player').getBoundingClientRect().top
+    }, false)
   },
   computed: {
     mapStyle() {

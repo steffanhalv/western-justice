@@ -5,6 +5,7 @@
       <button
         :style="'opacity: ' + ($store.state.direction === 'up' ? '1' : '.5')"
         class="up"
+        @contextmenu.prevent=""
         @touchstart="$store.state.direction = 'up', $store.state.walking = true"
         @mousedown="$store.state.direction = 'up', $store.state.walking = true"
         @mouseup="$store.state.walking = false"
@@ -13,6 +14,7 @@
       <button
         :style="'opacity: ' + ($store.state.direction === 'down' ? '1' : '.5')"
         class="down"
+        @contextmenu.prevent=""
         @touchstart="$store.state.direction = 'down', $store.state.walking = true"
         @touchend="$store.state.walking = false"
         @mousedown="$store.state.direction = 'down', $store.state.walking = true"
@@ -21,6 +23,7 @@
       <button
         :style="'opacity: ' + ($store.state.direction === 'right' ? '1' : '.5')"
         class="right"
+        @contextmenu.prevent=""
         @touchstart="$store.state.direction = 'right', $store.state.walking = true"
         @touchend="$store.state.walking = false"
         @mousedown="$store.state.direction = 'right', $store.state.walking = true"
@@ -29,18 +32,21 @@
       <button
         :style="'opacity: ' + ($store.state.direction === 'left' ? '1' : '.5')"
         class="left"
+        @contextmenu.prevent=""
         @touchstart="$store.state.direction = 'left', $store.state.walking = true"
         @touchend="$store.state.walking = false"
         @mousedown="$store.state.direction = 'left', $store.state.walking = true"
         @mouseup="$store.state.walking = false"
       >LEFT</button>
       <button
+        @contextmenu.prevent=""
         class="jump"
         @click="jump()"
-      >JUMP</button>
+      >FIRE</button>
       <button
         :style="'opacity: ' + ($store.state.run ? '1' : '.5')"
         class="run"
+        @contextmenu.prevent=""
         @click="$store.state.run = !$store.state.run"
       >RUN</button>
     </div>
@@ -144,6 +150,13 @@ export default {
   height: 100%;
   position: absolute;
   z-index: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+button, button > * {
+  user-select: none;
 }
 </style>
 
@@ -156,6 +169,7 @@ export default {
   opacity: .5;
   outline: none;
   transition: all .2s ease;
+  user-select: none;
 }
 .up:hover, .down:hover, .right:hover, .left:hover, .jump:hover, .run:hover {
   opacity: 1!important;
