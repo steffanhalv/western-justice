@@ -124,6 +124,7 @@ export default {
         username: this.$store.state.username,
         x: this.$store.state.x,
         y: this.$store.state.y,
+        hp: this.$store.state.hp,
         walking: this.$store.state.walking,
         run: this.$store.state.run,
         direction: this.$store.state.direction,
