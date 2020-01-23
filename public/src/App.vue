@@ -57,6 +57,10 @@ let i = 0
 export default {
   data() {
     return {
+      up: false,
+      down: false,
+      left: false,
+      right: false
     }
   },
   methods: {
@@ -85,15 +89,19 @@ export default {
         if (e.keyCode === 38 || e.keyCode === 87) {
           this.$store.state.direction = 'up'
           this.$store.state.walking = true
+          this.up = true
         } else if (e.keyCode === 40 || e.keyCode === 83) {
           this.$store.state.direction = 'down'
           this.$store.state.walking = true
+          this.down = true
         } else if (e.keyCode === 37 || e.keyCode === 65) {
           this.$store.state.direction = 'left'
           this.$store.state.walking = true
+          this.left = true
         } else if (e.keyCode === 39 || e.keyCode === 68) {
           this.$store.state.direction = 'right'
           this.$store.state.walking = true
+          this.right = true
         } else if (e.keyCode === 16) {
           this.$store.state.run = true
         } else if (e.keyCode === 32) {
@@ -104,16 +112,33 @@ export default {
     document.addEventListener('keyup', e => {
       // e.preventDefault()
       if (this.$store.state.playing) {
-        if ((e.keyCode === 38 || e.keyCode === 87) && this.$store.state.direction === 'up') {
-          this.$store.state.walking = false
-        } else if ((e.keyCode === 40 || e.keyCode === 83) && this.$store.state.direction === 'down') {
-          this.$store.state.walking = false
-        } else if ((e.keyCode === 37 || e.keyCode === 65) && this.$store.state.direction === 'left') {
-          this.$store.state.walking = false
-        } else if ((e.keyCode === 39 || e.keyCode === 68) && this.$store.state.direction === 'right') {
-          this.$store.state.walking = false
-        } else if (e.keyCode === 16) {
+        if ((e.keyCode === 38 || e.keyCode === 87)) {
+          this.up = false
+        }
+        if ((e.keyCode === 40 || e.keyCode === 83)) {
+          this.down = false
+        }
+        if ((e.keyCode === 37 || e.keyCode === 65)) {
+          this.left = false
+        }
+        if ((e.keyCode === 39 || e.keyCode === 68)) {
+          this.right = false
+        }
+        if (e.keyCode === 16) {
           this.$store.state.run = false
+        }
+        if (!this[this.$store.state.direction]) {
+          if (this.up) {
+            this.$store.state.direction = 'up'
+          } else if (this.down) {
+            this.$store.state.direction = 'down'
+          } else if (this.right) {
+            this.$store.state.direction = 'right'
+          } else if (this.left) {
+            this.$store.state.direction = 'left'
+          } else {
+            this.$store.state.walking = false
+          }
         }
       }
     })
