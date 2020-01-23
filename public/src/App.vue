@@ -51,7 +51,6 @@ let i = 0
 export default {
   data() {
     return {
-      shotgun: new Audio(require('@/assets/sound/shotgun.mp3'))
     }
   },
   methods: {
@@ -116,7 +115,8 @@ export default {
       this.$store.state.server = server
     })
     this.$store.state.io.on('shoot', bullet => {
-      this.shotgun.play()
+      let shotgun = new Audio(require('@/assets/sound/shotgun.mp3'))
+      shotgun.play()
       this.$store.state.bullets[bullet.uniq] = bullet
     })
     setInterval(() => {
