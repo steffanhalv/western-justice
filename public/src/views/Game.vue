@@ -1,8 +1,9 @@
 <template>
   <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden;">
     <div class="background" :style="mapStyle"></div>
+    <div class="water" :style="waterStyle"></div>
     <button @click="$router.push('/')">EXIT</button>
-    {{ $store.state.bullets.length }}
+    {{ Object.keys($store.state.bullets).length }}
     <player
       id="player"
       :player="$store.state"
@@ -83,8 +84,14 @@ export default {
   computed: {
     mapStyle() {
       return {
-        left: -this.$store.state.x + this.px - 1000 + 'px',
-        top: -this.$store.state.y + this.py - 1000 + 'px'
+        left: -this.$store.state.x + this.px - 4000 + 'px',
+        top: -this.$store.state.y + this.py - 4000 + 'px'
+      }
+    },
+    waterStyle() {
+      return {
+        backgroundAttachment: 'fixed',
+        backgroundPosition: (-this.$store.state.x + this.px - 1000 + 'px ') + (-this.$store.state.y + this.py - 1000 + 'px')
       }
     }
   },
@@ -121,8 +128,18 @@ button:hover {
   position: absolute;
   left: 0;
   top: 0;
-  width: 2000px;
-  height: 2000px;
-  background-image: url('~@/assets/gfx/dessert.png');
+  width: 8000px;
+  height: 8000px;
+  background-image: url(~@/assets/gfx/dessert.png);
+  border-radius: 50%;
+}
+.water {
+  z-index: -2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(~@/assets/gfx/water.gif);
 }
 </style>

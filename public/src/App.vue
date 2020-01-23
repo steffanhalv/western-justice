@@ -46,10 +46,14 @@
     </div>
   </div>
 </template>
-
 <script>
 let i = 0
 export default {
+  data() {
+    return {
+      shotgun: new Audio(require('@/assets/sound/shotgun.mp3'))
+    }
+  },
   methods: {
     jump() {
       this.shoot()
@@ -111,7 +115,8 @@ export default {
       this.$store.state.server = server
     })
     this.$store.state.io.on('shoot', bullet => {
-      this.$store.state.bullets.push(bullet)
+      this.shotgun.play()
+      this.$store.state.bullets[bullet.uniq] = bullet
     })
     setInterval(() => {
       this.$store.state.io.emit('update', {
@@ -133,9 +138,10 @@ export default {
 #app, body {
   font-family: 'Bevan', cursive;
   margin: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: absolute;
+  z-index: 0;
 }
 </style>
 
