@@ -96,7 +96,7 @@ export default {
     }
   },
   created() {
-    let audio = new Audio(require('@/assets/sound/dessert.mp3'))
+    let audio = new Audio(require('@/assets/sound/bg.mp3'))
     audio.loop = true
     audio.play()
     this.walk()
