@@ -77,6 +77,8 @@ export default {
         uniq: this.$store.state.username + i++,
         x: this.$store.state.x + 40,
         y: this.$store.state.y + 40,
+        width: 8,
+        height: 8,
         hp: this.$store.state.hp,
         direction: this.$store.state.direction
       })
@@ -150,11 +152,26 @@ export default {
       shotgun.play()
       this.$store.state.bullets[bullet.uniq] = bullet
     })
+    this.$store.state.io.on('elimination', elimination => {
+      this.$store.state.eliminations[elimination.uniq] = elimination
+    })
+    this.$store.state.io.on('item', item => {
+      this.$store.state.items[item.uniq] = item
+    })
+    this.$store.state.io.on('shoot', bullet => {
+      let shotgun = new Audio(require('@/assets/sound/shotgun.mp3'))
+      shotgun.play()
+      this.$store.state.bullets[bullet.uniq] = bullet
+    })
     setInterval(() => {
       this.$store.state.io.emit('update', {
         username: this.$store.state.username,
         x: this.$store.state.x,
         y: this.$store.state.y,
+        deaths: this.$store.state.deaths,
+        kills: this.$store.state.kills,
+        width: this.$store.state.width,
+        height: this.$store.state.height,
         hp: this.$store.state.hp,
         walking: this.$store.state.walking,
         run: this.$store.state.run,
