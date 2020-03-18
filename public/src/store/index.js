@@ -37,7 +37,7 @@ export default new Vuex.Store({
       {
         x: -1200,
         y: -500,
-        width: 1000,
+        width: 1100,
         height: 100
       },
       {
@@ -61,7 +61,7 @@ export default new Vuex.Store({
       {
         x: -1200,
         y: -1700,
-        width: 1000,
+        width: 1100,
         height: 100
       }
     ]

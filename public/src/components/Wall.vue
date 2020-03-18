@@ -22,5 +22,6 @@ export default {
   background-image: url('~@/assets/gfx/wall.jpg');
   background-size: 100px;
   z-index: 0;
+  border-radius: 20px;
 }
 </style>
