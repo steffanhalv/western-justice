@@ -1,8 +1,8 @@
 <template>
-  <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; z-index: 500;">
+  <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden;s">
     <div class="background" :style="mapStyle"></div>
     <div class="water" :style="waterStyle"></div>
-    <button @click="$router.push('/')">EXIT</button>
+    <button style="position: relative; z-index: 1" @click="$router.push('/')">EXIT</button>
     <player
       id="player"
       :player="$store.state"
