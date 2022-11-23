@@ -21,6 +21,6 @@
     "nodemon": "^2.0.2",
     "sendgrid": "^5.2.3",
     "soap": "^0.30.0",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.5.0"
   }
 }
